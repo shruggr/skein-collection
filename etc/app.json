@@ -1,7 +1,7 @@
 {
   "kind": "app",
   "name": "collection",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "programs": {
     "overlay": "bin/overlay.wasm",
     "collection-topic": "bin/collection-topic.wasm",

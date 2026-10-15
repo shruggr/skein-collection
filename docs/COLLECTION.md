@@ -113,6 +113,12 @@ app's box). `roles: {root: [register, registerLookup, deregisterLookup]}` gates 
 `<app>/register`. The four read routes name the filters `items`, `history`, `listings`, `sales`,
 each `collection-lookup.<find>`.
 
+## The image
+
+`image/` is the app's skein image: `etc/apps.json` lists this app, `..` (the repo root, a directory
+relative to the image), installed at birth over the default image's boundary programs. No root
+routes; nothing registered. `skein-host add <handle> --image <path>/image` boots it (shruggr/skein#152).
+
 ## Not built
 
 - A page.

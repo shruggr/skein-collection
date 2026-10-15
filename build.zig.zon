@@ -1,6 +1,6 @@
 .{
     .name = .skein_collection,
-    .version = "0.1.0",
+    .version = "0.1.1",
     .minimum_zig_version = "0.16.0",
     .fingerprint = 0x322505e1482baed1,
     .dependencies = .{
@@ -25,5 +25,6 @@
         "etc",
         "docs",
         "README.md",
+        "image",
     },
 }

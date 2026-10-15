@@ -4,7 +4,7 @@ The 1Sat collection overlay for a [skein](https://github.com/shruggr/skein),
 as an app: one topic per collection, a discovery topic, and the items
 lookup, running in the overlay engine
 ([shruggr/skein-overlay](https://github.com/shruggr/skein-overlay)) the app
-carries. Version **0.1.0**, Zig 0.16.0. Spec: shruggr/skein#151.
+carries. Version **0.1.1**, Zig 0.16.0. Spec: shruggr/skein#151.
 
 ## What it is
 
@@ -40,14 +40,24 @@ reject hooks and answers four reads, as BRC-24 queries and as read routes:
 Each takes `limit` (1 to 100, default 100) and `skip` (0 to 100000). docs/COLLECTION.md has the
 rules, the index and the answers in full.
 
+## Run it
+
+`image/` is this app's skein image: the default image's boundary programs with this app installed at
+birth (`image/etc/apps.json` lists it as `..`, the repo root). It registers nothing.
+
+```
+skein-host add <handle> --image <path to skein-collection>/image
+```
+
+The chain app (shruggr/skein-chain, `chain/1`) is installed by message after the claim, as for any
+skein. Into an existing skein, install both by message instead:
+
+```
+skein install <path to skein-chain> --instance <handle>
+skein install <path to skein-collection> --instance <handle>
+```
+
 ## Use it
-
-Install the chain app, then this app (the image `collection` in shruggr/skein boots with both):
-
-```
-skein-host install https://github.com/shruggr/skein-chain --instance <handle>
-skein-host install https://github.com/shruggr/skein-collection --instance <handle>
-```
 
 The manifest declares no topics and no lookups. Root registers each collection it follows, and the
 lookup once, in the app's box `<app>/register`:
@@ -79,7 +89,7 @@ does; plus the on-chain item `34adf92c` (`testdata/`).
 
 | | |
 |---|---|
-| this app and package | 0.1.0 (tag `v0.1.0`) |
+| this app and package | 0.1.1 (tag `v0.1.1`); the programs 0.1.0 |
 | skein-overlay | v0.13.0 by tag URL and hash in `build.zig.zon` (modules `topic`, `lookup`, `sk`); the engine in `bin/` is its build |
 | skein-1sat | v0.1.0 by tag URL and hash (module `onesat`) |
 | skein-sdk | v0.11.0, through skein-overlay (modules `chain`, `sk`, `cbor`) |
