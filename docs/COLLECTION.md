@@ -111,7 +111,8 @@ Newest first: unmined first, then the higher block, then the later position in i
 empty: no topics, no lookups; the install derives the engine's routes (`/submit`, `/lookup`, the
 app's box). `roles: {root: [register, registerLookup, deregisterLookup]}` gates the box
 `<app>/register`. The four read routes name the filters `items`, `history`, `listings`, `sales`,
-each `collection-lookup.<find>`.
+each `collection-lookup.<find>`. The engine's reads `/holds`, `/anchors` and `/admitted` are routed as
+skein-overlay's manifest routes them (filters `holds`, `anchors`, `admitted`, each `overlay.<name>`).
 
 ## The image
 
@@ -123,4 +124,5 @@ routes; nothing registered. `skein-host add <handle> --image <path>/image` boots
 
 - A page.
 - Search beyond the four reads, and a list of collections (`tm_1sat_collection`'s lookup).
-- Seeding from JungleBus, sync and discovery between peers (shruggr/skein#150).
+- Seeding from JungleBus, and discovery between peers. Sync is the host's (shruggr/skein#150) over
+  the engine's anchors.

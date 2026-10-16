@@ -4,13 +4,13 @@ The 1Sat collection overlay for a [skein](https://github.com/shruggr/skein),
 as an app: one topic per collection, a discovery topic, and the items
 lookup, running in the overlay engine
 ([shruggr/skein-overlay](https://github.com/shruggr/skein-overlay)) the app
-carries. Version **0.1.1**, Zig 0.16.0. Spec: shruggr/skein#151.
+carries. Version **0.2.0**, Zig 0.16.0. Spec: shruggr/skein#151.
 
 ## What it is
 
 | program | file | what |
 |---|---|---|
-| `overlay` | `bin/overlay.wasm` | the engine, skein-overlay 0.13.0's build |
+| `overlay` | `bin/overlay.wasm` | the engine, skein-overlay 0.14.0's build |
 | `collection-topic` | `bin/collection-topic.wasm` | the topic manager: `tm_1sat_collection` and `tm_col_<txid>_<vout>` |
 | `collection-lookup` | `bin/collection-lookup.wasm` | the lookup `ls_collection` and its four reads |
 
@@ -71,6 +71,10 @@ Registered without `topics`, the lookup hears every topic. `tm_1sat_collection` 
 same way for every collection mint. Submissions go to `POST /<app>/submit` (BRC-22, `X-Topics`) or
 by message into `<app>/submit`; skein-overlay's README has the rest.
 
+The engine's own reads are routed too: `/<app>/holds`, and for a peer's sync `/<app>/anchors` and
+`/<app>/admitted` (each topic's anchor chain and its mined transactions by height; skein-overlay
+"Anchors"). Each `tm_col_<id>` beats `tipHeight`, `tipAnchor` and `tailDigest` on `<topic>-live`.
+
 ## Build and test
 
 Zig 0.16.0 (`mise.toml`).
@@ -89,8 +93,8 @@ does; plus the on-chain item `34adf92c` (`testdata/`).
 
 | | |
 |---|---|
-| this app and package | 0.1.1 (tag `v0.1.1`); the programs 0.1.0 |
-| skein-overlay | v0.13.0 by tag URL and hash in `build.zig.zon` (modules `topic`, `lookup`, `sk`); the engine in `bin/` is its build |
+| this app and package | 0.2.0 (tag `v0.2.0`); the programs 0.1.0 |
+| skein-overlay | v0.14.0 by tag URL and hash in `build.zig.zon` (modules `topic`, `lookup`, `sk`); the engine in `bin/` is its build |
 | skein-1sat | v0.1.0 by tag URL and hash (module `onesat`) |
 | skein-sdk | v0.11.0, through skein-overlay (modules `chain`, `sk`, `cbor`) |
 | requires | `chain/1` (shruggr/skein-chain) |
